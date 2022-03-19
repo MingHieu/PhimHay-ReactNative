@@ -51,7 +51,7 @@ const VideoPlayer = props => {
       videoRef.current = null;
       timeRef.current = null;
     };
-  }, []);
+  }, [source]);
 
   React.useEffect(() => {
     const unsubcribe = Orientation.addOrientationListener(orientation => {
