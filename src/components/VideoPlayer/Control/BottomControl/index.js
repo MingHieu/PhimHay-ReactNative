@@ -4,7 +4,7 @@ import {StyleSheet, Text, TouchableWithoutFeedback, View} from 'react-native';
 import IconAntDesign from 'react-native-vector-icons/AntDesign';
 import IconEntypo from 'react-native-vector-icons/Entypo';
 import IconFontiso from 'react-native-vector-icons/Fontisto';
-import timeNumberToString from '../../../../util/timeNumberToString';
+import timeNumberToString from '../../../../shared/util/timeNumberToString';
 
 const BottomControl = props => {
   const {

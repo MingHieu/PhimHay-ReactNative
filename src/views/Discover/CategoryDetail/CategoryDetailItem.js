@@ -7,10 +7,13 @@ import {
   View,
 } from 'react-native';
 import LazyImage from '../../../components/LazyImage/index';
-import {SCREEN_WIDTH} from '../../../util/size';
+import {useGlobalStyle} from '../../../shared/hook';
+import {SCREEN_WIDTH} from '../../../shared/theme/size';
 
 const CategoryDetailItem = props => {
   const {coverVerticalUrl, domainType, id, name, sort, navigation} = props;
+  const globalStyles = useGlobalStyle();
+
 
   const _onPress = () => {
     navigation.navigate('MovieDetail', {
@@ -23,7 +26,7 @@ const CategoryDetailItem = props => {
     <TouchableWithoutFeedback onPress={_onPress}>
       <View style={styles.container}>
         <LazyImage source={{uri: coverVerticalUrl}} style={styles.coverImage} />
-        <Text style={styles.title}>{name}</Text>
+        <Text style={[globalStyles.text, styles.title]}>{name}</Text>
       </View>
     </TouchableWithoutFeedback>
   );

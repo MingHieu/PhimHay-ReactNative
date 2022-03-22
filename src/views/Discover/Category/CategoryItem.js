@@ -1,10 +1,12 @@
 import React from 'react';
 import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
-import {SCREEN_WIDTH} from '../../../util/size';
+import {useGlobalStyle} from '../../../shared/hook';
+import {SCREEN_WIDTH} from '../../../shared/theme/size';
 
 const CategoryItem = props => {
   const {name, params, category, screeningType, navigation} = props;
+  const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
     navigation.navigate('CategoryDetail', {
@@ -22,7 +24,7 @@ const CategoryItem = props => {
         source={require('../../../assets/image/clapperboard.png')}
         style={styles.image}
       />
-      <Text style={styles.title}>{name}</Text>
+      <Text style={[globalStyles.text, styles.title]}>{name}</Text>
       <Entypo name="chevron-right" size={26} color={'#000'} />
     </TouchableOpacity>
   );

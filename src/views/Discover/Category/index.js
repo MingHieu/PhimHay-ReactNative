@@ -3,14 +3,16 @@ import React from 'react';
 import CategoryItem from './CategoryItem';
 import {useNavigation, useRoute} from '@react-navigation/native';
 import BackButton from '../BackButton';
+import { useGlobalStyle } from '../../../shared/hook';
 
 const CategoryScreen = () => {
   const navigation = useNavigation();
   const route = useRoute();
   const {params, screeningItems} = route.params;
-
+const globalStyles = useGlobalStyle()
+  
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <BackButton />
       <FlatList
         data={screeningItems[1].items}
@@ -32,9 +34,3 @@ const CategoryScreen = () => {
 
 export default CategoryScreen;
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});

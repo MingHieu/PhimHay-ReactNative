@@ -3,12 +3,13 @@ import React from 'react';
 import {FlatList, SafeAreaView, StyleSheet, Text, View} from 'react-native';
 import Title from '../../components/Title';
 import {SearchApi} from '../../core/api';
-import globalStyles from '../../util/style';
+import {useGlobalStyle} from '../../shared/hook/';
 import ConfigItem from './ConfigItem';
 
 const ExploreScreen = () => {
   const navigation = useNavigation();
   const [configList, setConfigList] = React.useState([]);
+  const globalStyles = useGlobalStyle();
 
   React.useEffect(() => {
     SearchApi.searchConfig()
@@ -20,7 +21,7 @@ const ExploreScreen = () => {
 
   return (
     <SafeAreaView style={globalStyles.safeArea}>
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         <Title text={'Discover'} />
         <FlatList
           data={configList}
@@ -42,10 +43,3 @@ const ExploreScreen = () => {
 };
 
 export default ExploreScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});

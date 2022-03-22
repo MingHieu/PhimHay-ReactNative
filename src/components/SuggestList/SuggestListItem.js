@@ -6,6 +6,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
+import {useGlobalStyle} from '../../shared/hook';
 import LazyImage from '../LazyImage';
 
 const SuggestListItem = props => {
@@ -26,6 +27,7 @@ const SuggestListItem = props => {
     year,
     navigation,
   } = props;
+  const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
     navigation.push('MovieDetail', {
@@ -38,7 +40,7 @@ const SuggestListItem = props => {
     <TouchableWithoutFeedback onPress={_onPress}>
       <View style={styles.container}>
         <LazyImage style={styles.coverImage} source={{uri: coverVerticalUrl}} />
-        <Text style={styles.title}>{name}</Text>
+        <Text style={[globalStyles.text, styles.title]}>{name}</Text>
       </View>
     </TouchableWithoutFeedback>
   );

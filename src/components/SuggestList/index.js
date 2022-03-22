@@ -1,12 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {useGlobalStyle} from '../../shared/hook';
 import SuggestListItem from './SuggestListItem';
 
 const SuggestList = props => {
   const {refList, likeList} = props;
   const navigation = useNavigation();
   const [data, setData] = React.useState();
+  const globalStyles = useGlobalStyle();
 
   React.useEffect(() => {
     const list = refList.length ? refList : likeList;
@@ -15,7 +17,7 @@ const SuggestList = props => {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>More Like This</Text>
+      <Text style={[globalStyles.text, styles.title]}>More Like This</Text>
       <FlatList
         data={data}
         renderItem={({item, index}) => (

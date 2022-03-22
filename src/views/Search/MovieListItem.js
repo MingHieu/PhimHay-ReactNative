@@ -8,7 +8,8 @@ import {
   Alert,
 } from 'react-native';
 import LazyImage from '../../components/LazyImage';
-import {SCREEN_WIDTH} from '../../util/size';
+import {useGlobalStyle} from '../../shared/hook';
+import {SCREEN_WIDTH} from '../../shared/theme/size';
 
 const MovieListItem = props => {
   const {
@@ -25,6 +26,7 @@ const MovieListItem = props => {
     upInfo,
     navigation,
   } = props;
+  const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
     if (releaseTime == '') {
@@ -42,8 +44,10 @@ const MovieListItem = props => {
       <View style={styles.container}>
         <LazyImage source={{uri: coverVerticalUrl}} style={styles.coverImage} />
         <View style={styles.textContainer}>
-          <Text style={styles.title}>{name}</Text>
-          <Text style={styles.releaseTime}>{releaseTime}</Text>
+          <Text style={[globalStyles.text, styles.title]}>{name}</Text>
+          <Text style={[globalStyles.text, styles.releaseTime]}>
+            {releaseTime}
+          </Text>
         </View>
       </View>
     </TouchableWithoutFeedback>

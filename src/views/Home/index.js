@@ -9,7 +9,7 @@ import {
 } from 'react-native';
 import Title from '../../components/Title';
 import {HomeApi} from '../../core/api';
-import globalStyles from '../../util/style';
+import {useGlobalStyle} from '../../shared/hook/';
 import Banner from './Banner';
 import BlockGroup from './BlockGroup';
 import SingleAlbum from './SingleAlbum';
@@ -19,6 +19,7 @@ const HomeScreen = () => {
   const [recommendItems, setRecommendItems] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
   const [endOfList, setEndOfList] = React.useState(false);
+  const globalStyles = useGlobalStyle();
 
   React.useEffect(() => {
     HomeApi.getHome(page)
@@ -98,7 +99,7 @@ const HomeScreen = () => {
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <Title text={'Home'} />
-      <View style={styles.container}>
+      <View style={globalStyles.container}>
         <FlatList
           data={recommendItems}
           renderItem={renderPage}
@@ -115,10 +116,3 @@ const HomeScreen = () => {
 };
 
 export default HomeScreen;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
-});

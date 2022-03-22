@@ -1,8 +1,8 @@
 import axios from 'axios';
 import React from 'react';
 import {StyleSheet, Text, View} from 'react-native';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../../util/size';
-import PF_SRT from '../../../../util/srtToObject';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../../shared/theme/size';
+import PF_SRT from '../../../../shared/util/srtToObject';
 
 const Subtitle = props => {
   const {

@@ -8,12 +8,16 @@ import {
 } from 'react-native';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconMaterialIcons from 'react-native-vector-icons/MaterialIcons';
-import {SCREEN_WIDTH} from '../../util/size';
+import {SCREEN_WIDTH} from '../../shared/theme/size';
+import {useTheme} from '@react-navigation/native';
+import {useGlobalStyle} from '../../shared/hook';
 
 const SearchBar = props => {
   const {submitHandle, changeTextHandle, clearTextHandle} = props;
   const [visible, setVisible] = React.useState(false);
   const inputRef = React.useRef();
+  const {colors} = useTheme();
+  const globalStyles = useGlobalStyle();
 
   const _onChangeText = value => {
     if (value) {
@@ -31,21 +35,34 @@ const SearchBar = props => {
   };
 
   return (
-    <View style={styles.container}>
-      <View style={styles.content}>
+    <View
+      style={[
+        styles.container,
+        {
+          backgroundColor: colors.background,
+        },
+      ]}>
+      <View
+        style={[
+          styles.content,
+          {
+            borderColor: colors.cardBorder,
+          },
+        ]}>
         <TouchableOpacity style={styles.search} onPress={() => {}}>
-          <IconIonicons name="search-sharp" size={20} color={'#000'} />
+          <IconIonicons name="search-sharp" size={20} color={colors.icon} />
         </TouchableOpacity>
         <TextInput
-          style={styles.input}
+          style={[globalStyles.text, styles.input]}
           placeholder={'Search...'}
+          placeholderTextColor={colors.placeholder}
           ref={inputRef}
           onChangeText={_onChangeText}
           onSubmitEditing={submitHandle}
         />
         {visible && (
           <TouchableOpacity style={styles.delete} onPress={clearText}>
-            <IconMaterialIcons name="clear" size={20} color={'#000'} />
+            <IconMaterialIcons name="clear" size={20} color={colors.icon} />
           </TouchableOpacity>
         )}
       </View>
@@ -59,7 +76,6 @@ const styles = StyleSheet.create({
   container: {
     width: SCREEN_WIDTH,
     height: 50,
-    backgroundColor: '#FFF',
     paddingHorizontal: 10,
     marginTop: 10,
   },
@@ -68,7 +84,6 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     paddingHorizontal: 5,
-    borderColor: '#000',
     borderWidth: 2,
     borderRadius: 8,
   },

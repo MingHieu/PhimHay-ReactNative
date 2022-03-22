@@ -1,6 +1,6 @@
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
-import formatTitleListName from '../../../util/formatTitleListName';
+import formatTitleListName from '../../../shared/util/formatTitleListName';
 import BlockGroupItem from './BlockGroupItem';
 
 const BlockGroup = ({data}) => {

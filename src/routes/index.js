@@ -6,15 +6,19 @@ import {Text} from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
+import {useSelector, useDispatch} from 'react-redux';
+import {changeTheme} from '../core/redux/themeSlice';
+import {DARK_MODE} from '../core/storage/';
+import {DarkTheme, LightTheme} from '../shared/theme';
 import CategoryScreen from '../views/Discover/Category';
+import CategoryDetail from '../views/Discover/CategoryDetail/index';
 import DiscoverScreen from '../views/Discover/index';
 import HomeScreen from '../views/Home/index';
 import MovieDetail from '../views/MovieDetail/index';
 import SearchScreen from '../views/Search/index';
 import SettingScreen from '../views/Setting/index';
-import WatchScreen from '../views/Watch/index';
-import CategoryDetail from '../views/Discover/CategoryDetail/index';
 import SplashScreen from '../views/SplashScreen/index';
+import WatchScreen from '../views/Watch/index';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -33,13 +37,14 @@ const DiscoverStack = () => {
 };
 
 const HomeTabs = () => {
+  const theme = useSelector(state => state.theme);
   return (
     <Tab.Navigator
       screenOptions={({route, navigation}) => ({
         // tabBarShowLabel: false,
         headerShown: false,
         tabBarActiveTintColor: 'red',
-        tabBarInactiveTintColor: 'black',
+        tabBarInactiveTintColor: theme == 'light' ? 'black' : '#3C3C3C',
         tabBarIcon: ({focused, color, size}) => {
           if (route.name == 'Home')
             return <IconFontAwesome name="home" size={23} color={color} />;
@@ -66,8 +71,21 @@ const HomeTabs = () => {
 };
 
 const AppSource = () => {
+  const theme = useSelector(state => state.theme);
+  const dispatch = useDispatch();
+
+  React.useEffect(() => {
+    DARK_MODE.get()
+      .then(res => {
+        if (res) dispatch(changeTheme('dark'));
+        else dispatch(changeTheme('light'));
+      })
+      .catch(e => dispatch(changeTheme('light')));
+  }, []);
+
   return (
-    <NavigationContainer>
+    <NavigationContainer
+      theme={theme.value == 'light' ? LightTheme : DarkTheme}>
       <Stack.Navigator
         screenOptions={{
           headerShown: false,

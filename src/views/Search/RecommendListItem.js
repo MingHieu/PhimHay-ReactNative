@@ -6,11 +6,13 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {SCREEN_WIDTH} from '../../util/size';
+import {SCREEN_WIDTH} from '../../shared/theme/size';
 import LazyImage from '../../components/LazyImage/index';
+import {useGlobalStyle} from '../../shared/hook';
 
 const RecommendListItem = props => {
   const {cover, domainType, id, title, navigation} = props;
+  const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
     navigation.navigate('MovieDetail', {
@@ -23,7 +25,7 @@ const RecommendListItem = props => {
     <TouchableWithoutFeedback onPress={_onPress}>
       <View style={styles.container}>
         <LazyImage source={{uri: cover}} style={styles.coverImage} />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[globalStyles.text, styles.title]}>{title}</Text>
       </View>
     </TouchableWithoutFeedback>
   );

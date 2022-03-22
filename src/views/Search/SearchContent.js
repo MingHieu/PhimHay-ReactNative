@@ -1,12 +1,14 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, Text, View} from 'react-native';
+import {useGlobalStyle} from '../../shared/hook';
 import MovieListItem from './MovieListItem';
 import RecommendList from './RecommendList';
 
 const SearchContent = props => {
   const {movieList, recommendList, notFound} = props;
   const navigation = useNavigation();
+  const globalStyles = useGlobalStyle();
 
   return (
     <View style={styles.container}>
@@ -32,7 +34,7 @@ const SearchContent = props => {
         ListEmptyComponent={() => {
           return notFound ? (
             <View style={styles.emptyList}>
-              <Text>Movie not found</Text>
+              <Text style={globalStyles.text}>Movie not found</Text>
             </View>
           ) : (
             <RecommendList

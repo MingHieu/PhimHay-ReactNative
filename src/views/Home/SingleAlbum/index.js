@@ -1,17 +1,21 @@
 import {useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {FlatList, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import formatTitleListName from '../../../util/formatTitleListName';
+import {useGlobalStyle} from '../../../shared/hook';
+import formatTitleListName from '../../../shared/util/formatTitleListName';
 import SingleAlbumItem from './SingleAlbumItem';
 
 const SingleAlbum = ({data}) => {
   const navigation = useNavigation();
   const title = data.homeSectionName;
   const SingleAlbumList = data.recommendContentVOList;
+  const globalStyles = useGlobalStyle();
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>{formatTitleListName(title)}</Text>
+      <Text style={[globalStyles.text, styles.title]}>
+        {formatTitleListName(title)}
+      </Text>
       <FlatList
         data={SingleAlbumList}
         renderItem={({item, index}) => (

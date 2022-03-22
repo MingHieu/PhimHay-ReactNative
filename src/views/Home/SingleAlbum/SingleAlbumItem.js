@@ -7,8 +7,11 @@ import {
   View,
 } from 'react-native';
 import LazyImage from '../../../components/LazyImage';
+import {useGlobalStyle} from '../../../shared/hook';
 
 const SingleAlbumItem = props => {
+  const globalStyles = useGlobalStyle();
+
   const {
     category,
     contentType,
@@ -35,7 +38,7 @@ const SingleAlbumItem = props => {
     <TouchableWithoutFeedback onPress={_onPress}>
       <View style={styles.container}>
         <LazyImage source={{uri: imageUrl}} style={styles.poster} />
-        <Text style={styles.title}>{title}</Text>
+        <Text style={[globalStyles.text, styles.title]}>{title}</Text>
       </View>
     </TouchableWithoutFeedback>
   );

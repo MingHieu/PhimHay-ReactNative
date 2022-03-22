@@ -1,4 +1,4 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute, useTheme} from '@react-navigation/native';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -13,7 +13,8 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import SuggestList from '../../components/SuggestList';
 import VideoPlayer from '../../components/VideoPlayer';
 import {MovieApi} from '../../core/api';
-import {STATUS_BAR_HEIGHT} from '../../util/size';
+import {useGlobalStyle} from '../../shared/hook';
+import {STATUS_BAR_HEIGHT} from '../../shared/theme/size';
 import EpisodeList from './EpisodeList';
 
 const WatchScreen = () => {
@@ -28,6 +29,8 @@ const WatchScreen = () => {
   const [initialize, setInitialize] = React.useState(true);
   const [initializeVideo, setInitializeVideo] = React.useState(true); // ngăn không để lặp lại hành động lấy link phim khi lần đầu vào phim
   const [initializeDefinition, setInitializeDefinition] = React.useState(true); // ngăn không để seek về 0 khi đổi quality
+  const globalStyles = useGlobalStyle();
+  const {colors} = useTheme();
 
   // Lấy thông tin phim
   React.useEffect(() => {
@@ -82,9 +85,9 @@ const WatchScreen = () => {
   };
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <TouchableOpacity style={styles.backBtn} onPress={backHandle}>
-        <IconIonicons name="chevron-back" size={30} color={'#000'} />
+        <IconIonicons name="chevron-back" size={30} color={colors.icon} />
       </TouchableOpacity>
       {movieUri ? (
         <>
@@ -101,15 +104,21 @@ const WatchScreen = () => {
             setInitializeDefinition={setInitializeDefinition}
           />
           <ScrollView showsVerticalScrollIndicator={false}>
-            <Text style={styles.title}>{movieDetail.name}</Text>
+            <Text style={[globalStyles.text, styles.title]}>
+              {movieDetail.name}
+            </Text>
             <View style={styles.content}>
               <View style={styles.content}>
                 <IconAntDesign name="star" size={18} color={'#F5C518'} />
-                <Text style={styles.rating}>{movieDetail.score}</Text>
+                <Text style={[globalStyles.text, styles.rating]}>
+                  {movieDetail.score}
+                </Text>
               </View>
               <View style={styles.content}>
                 <IconAntDesign name="calendar" size={18} color={'red'} />
-                <Text style={styles.rating}>{movieDetail.year}</Text>
+                <Text style={[globalStyles.text, styles.rating]}>
+                  {movieDetail.year}
+                </Text>
               </View>
             </View>
             <EpisodeList
@@ -136,10 +145,6 @@ const WatchScreen = () => {
 export default WatchScreen;
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#FFF',
-  },
   backBtn: {
     marginTop: STATUS_BAR_HEIGHT,
     marginLeft: 10,

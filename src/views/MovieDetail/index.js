@@ -1,4 +1,4 @@
-import {useNavigation, useRoute} from '@react-navigation/native';
+import {useNavigation, useRoute, useTheme} from '@react-navigation/native';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -16,7 +16,12 @@ import IconIonicons from 'react-native-vector-icons/Ionicons';
 import LazyImage from '../../components/LazyImage';
 import SuggestList from '../../components/SuggestList';
 import {MovieApi} from '../../core/api';
-import {SCREEN_HEIGHT, SCREEN_WIDTH, STATUS_BAR_HEIGHT} from '../../util/size';
+import {useGlobalStyle} from '../../shared/hook';
+import {
+  SCREEN_HEIGHT,
+  SCREEN_WIDTH,
+  STATUS_BAR_HEIGHT,
+} from '../../shared/theme/size';
 import MovieTagList from './MovieTagList';
 
 const MovieDetail = () => {
@@ -25,6 +30,8 @@ const MovieDetail = () => {
   const {id, category} = route.params;
   const [movieDetail, setMovieDetail] = React.useState();
   const [loading, setLoading] = React.useState(true);
+  const {colors} = useTheme();
+  const globalStyles = useGlobalStyle();
 
   React.useEffect(() => {
     setLoading(true);
@@ -59,7 +66,13 @@ const MovieDetail = () => {
         <ImageBackground
           style={styles.background}
           source={{uri: movieDetail.coverVerticalUrl}}>
-          <View style={styles.content}>
+          <View
+            style={[
+              styles.content,
+              {
+                backgroundColor: colors.background,
+              },
+            ]}>
             <View style={styles.header}>
               <LazyImage
                 style={styles.poster}
@@ -77,8 +90,12 @@ const MovieDetail = () => {
             <ScrollView
               style={styles.body}
               showsVerticalScrollIndicator={false}>
-              <Text style={styles.title}>{movieDetail.name}</Text>
-              <Text style={styles.description}>{movieDetail.introduction}</Text>
+              <Text style={[globalStyles.text, styles.title]}>
+                {movieDetail.name}
+              </Text>
+              <Text style={[globalStyles.text, styles.description]}>
+                {movieDetail.introduction}
+              </Text>
               <TouchableOpacity style={styles.watchBtn} onPress={watchHandle}>
                 <Text style={styles.watchBtnText}>Watch now</Text>
               </TouchableOpacity>

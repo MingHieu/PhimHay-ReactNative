@@ -8,7 +8,7 @@ import {
   TouchableWithoutFeedback,
 } from 'react-native';
 import React from 'react';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../util/size';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../shared/theme/size';
 import Animated, {
   useAnimatedGestureHandler,
   useAnimatedStyle,

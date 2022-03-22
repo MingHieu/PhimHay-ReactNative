@@ -7,7 +7,7 @@ import {
   TouchableWithoutFeedback,
   View,
 } from 'react-native';
-import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../../util/size';
+import {SCREEN_HEIGHT, SCREEN_WIDTH} from '../../../../shared/theme/size';
 import QualityOption from './QualityOption';
 import SubtitleOption from './SubtitleOption';
 

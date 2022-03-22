@@ -3,7 +3,7 @@ import {ActivityIndicator, SafeAreaView, StyleSheet, View} from 'react-native';
 import SearchBar from '../../components/SearchBar';
 import Title from '../../components/Title';
 import {SearchApi} from '../../core/api';
-import globalStyles from '../../util/style';
+import {useGlobalStyle} from '../../shared/hook';
 import SearchContent from './SearchContent';
 
 const SearchScreen = () => {
@@ -12,6 +12,7 @@ const SearchScreen = () => {
   const [recommendList, setRecommendList] = React.useState([]);
   const [notFound, setNotFound] = React.useState(false);
   const [loading, setLoading] = React.useState(false);
+  const globalStyles = useGlobalStyle();
 
   React.useEffect(() => {
     SearchApi.searchLeaderBoard()

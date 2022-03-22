@@ -9,10 +9,14 @@ import {
 } from 'react-native';
 import Orientation from 'react-native-orientation';
 import Video from 'react-native-video';
-import {SCREEN_WIDTH} from '../../util/size';
+import {SCREEN_WIDTH} from '../../shared/theme/size';
 import Control from './Control';
 import Poster from './Poster';
-import {useFocusEffect, useNavigation} from '@react-navigation/native';
+import {
+  useFocusEffect,
+  useNavigation,
+  useTheme,
+} from '@react-navigation/native';
 
 const VideoPlayer = props => {
   const {
@@ -43,13 +47,14 @@ const VideoPlayer = props => {
   const [loadingSubtitle, setLoadingSubtitle] = React.useState(false);
   const [loadingVideo, setLoadingVideo] = React.useState(true);
   const [seekTime, setSeekTime] = React.useState();
+  const {colors} = useTheme();
 
   React.useEffect(() => {
     return () => {
-      clearTimeout(videoRef);
       clearTimeout(timeRef);
-      videoRef.current = null;
       timeRef.current = null;
+      setDis(true);
+      setFirstTouch(true);
     };
   }, [source]);
 
@@ -201,7 +206,13 @@ const VideoPlayer = props => {
   );
 
   return (
-    <View style={fullScreen ? styles.fullScreenContainer : styles.container}>
+    <View
+      style={[
+        fullScreen ? styles.fullScreenContainer : styles.container,
+        {
+          backgroundColor: 'black',
+        },
+      ]}>
       <Video
         style={{flex: 1}}
         source={source}
@@ -258,12 +269,10 @@ const styles = StyleSheet.create({
     width: SCREEN_WIDTH,
     height: (SCREEN_WIDTH * 9) / 16,
     justifyContent: 'center',
-    backgroundColor: '#000',
   },
   fullScreenContainer: {
     ...StyleSheet.absoluteFill,
     flex: 1,
-    backgroundColor: '#000',
     zIndex: 999,
   },
   loading: {

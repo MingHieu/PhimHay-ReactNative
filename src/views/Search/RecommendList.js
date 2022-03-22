@@ -5,6 +5,7 @@ import RecommendListItem from './RecommendListItem';
 const RecommendList = props => {
   const {recommendList, navigation} = props;
 
+  
   return (
     <FlatList
       data={recommendList}

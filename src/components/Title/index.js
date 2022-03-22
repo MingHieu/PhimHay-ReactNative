@@ -1,8 +1,10 @@
 import {StyleSheet, Text, View} from 'react-native';
 import React from 'react';
+import {useGlobalStyle} from '../../shared/hook';
 
 const Title = ({text, style}) => {
-  return <Text style={[styles.title, style]}>{text}</Text>;
+  const globalStyles = useGlobalStyle();
+  return <Text style={[styles.title, globalStyles.text, style]}>{text}</Text>;
 };
 
 export default Title;

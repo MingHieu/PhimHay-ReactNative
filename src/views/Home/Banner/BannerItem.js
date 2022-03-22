@@ -1,7 +1,7 @@
 import React from 'react';
 import {Image, StyleSheet, Text, View} from 'react-native';
 import LazyImage from '../../../components/LazyImage';
-import {SCREEN_WIDTH} from '../../../util/size';
+import {SCREEN_WIDTH} from '../../../shared/theme/size';
 const width = SCREEN_WIDTH - 20;
 
 const BannerItem = props => {
