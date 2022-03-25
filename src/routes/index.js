@@ -2,11 +2,10 @@ import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import React from 'react';
-import {Text} from 'react-native';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
 import IconMaterial from 'react-native-vector-icons/MaterialIcons';
-import {useSelector, useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {changeTheme} from '../core/redux/themeSlice';
 import {DARK_MODE} from '../core/storage/';
 import {DarkTheme, LightTheme} from '../shared/theme';
@@ -19,6 +18,7 @@ import SearchScreen from '../views/Search/index';
 import SettingScreen from '../views/Setting/index';
 import SplashScreen from '../views/SplashScreen/index';
 import WatchScreen from '../views/Watch/index';
+import {APP_SCREEN_TYPES} from './screenTypes';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
@@ -29,43 +29,53 @@ const DiscoverStack = () => {
       screenOptions={{
         headerShown: false,
       }}>
-      <Stack.Screen name="Discover" component={DiscoverScreen} />
-      <Stack.Screen name="Category" component={CategoryScreen} />
-      <Stack.Screen name="CategoryDetail" component={CategoryDetail} />
+      <Stack.Screen
+        name={APP_SCREEN_TYPES.DISCOVER}
+        component={DiscoverScreen}
+      />
+      <Stack.Screen
+        name={APP_SCREEN_TYPES.CATEGORY}
+        component={CategoryScreen}
+      />
+      <Stack.Screen
+        name={APP_SCREEN_TYPES.CATEGORY_DETAIL}
+        component={CategoryDetail}
+      />
     </Stack.Navigator>
   );
 };
 
 const HomeTabs = () => {
   const theme = useSelector(state => state.theme);
+
   return (
     <Tab.Navigator
       screenOptions={({route, navigation}) => ({
         // tabBarShowLabel: false,
         headerShown: false,
         tabBarActiveTintColor: 'red',
-        tabBarInactiveTintColor: theme == 'light' ? 'black' : '#3C3C3C',
+        tabBarInactiveTintColor: theme.value == 'light' ? '#000' : '#3C3C3C',
         tabBarIcon: ({focused, color, size}) => {
-          if (route.name == 'Home')
+          if (route.name == APP_SCREEN_TYPES.HOME)
             return <IconFontAwesome name="home" size={23} color={color} />;
-          if (route.name == 'DiscoverStack')
+          if (route.name == APP_SCREEN_TYPES.DISCOVER_STACK)
             return <IconMaterial name="explore" size={23} color={color} />;
-          if (route.name == 'Search')
+          if (route.name == APP_SCREEN_TYPES.SEARCH)
             return <IconFontAwesome name="search" size={23} color={color} />;
-          if (route.name == 'Setting')
+          if (route.name == APP_SCREEN_TYPES.SETTING)
             return (
               <IconIonicons name="settings-sharp" size={23} color={color} />
             );
         },
       })}>
-      <Tab.Screen name="Home" component={HomeScreen} />
+      <Tab.Screen name={APP_SCREEN_TYPES.HOME} component={HomeScreen} />
       <Tab.Screen
-        name="DiscoverStack"
+        name={APP_SCREEN_TYPES.DISCOVER_STACK}
         component={DiscoverStack}
         options={{title: 'Discover'}}
       />
-      <Tab.Screen name="Search" component={SearchScreen} />
-      <Tab.Screen name="Setting" component={SettingScreen} />
+      <Tab.Screen name={APP_SCREEN_TYPES.SEARCH} component={SearchScreen} />
+      <Tab.Screen name={APP_SCREEN_TYPES.SETTING} component={SettingScreen} />
     </Tab.Navigator>
   );
 };
@@ -92,17 +102,23 @@ const AppSource = () => {
           // statusBarHidden: true,
           orientation: 'portrait',
         }}>
-        <Stack.Screen name="SplashScreen" component={SplashScreen} />
         <Stack.Screen
-          name="HomeTab"
+          name={APP_SCREEN_TYPES.SPLASH_SCREEN}
+          component={SplashScreen}
+        />
+        <Stack.Screen
+          name={APP_SCREEN_TYPES.HOME_TAB}
           component={HomeTabs}
           options={{
             animation: 'fade',
           }}
         />
-        <Stack.Screen name="MovieDetail" component={MovieDetail} />
         <Stack.Screen
-          name="WatchScreen"
+          name={APP_SCREEN_TYPES.MOVIE_DETAIL}
+          component={MovieDetail}
+        />
+        <Stack.Screen
+          name={APP_SCREEN_TYPES.WATCH_SCREEN}
           component={WatchScreen}
           options={{
             orientation: 'all',

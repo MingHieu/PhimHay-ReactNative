@@ -1,3 +1,4 @@
+import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {
   Image,
@@ -14,12 +15,11 @@ import {changeTheme} from '../../core/redux/themeSlice';
 import {DARK_MODE} from '../../core/storage';
 import {useGlobalStyle} from '../../shared/hook';
 import DraggableModal from './DraggableModal';
-import {useTheme} from '@react-navigation/native';
 
 const SettingScreen = () => {
   const modalRef = React.useRef();
   const [darkMode, setDarkMode] = React.useState(false);
-  const theme = useSelector(state => state.theme.value);
+  const theme = useSelector(state => state.theme);
   const dispatch = useDispatch();
   const globalStyles = useGlobalStyle();
   const {colors} = useTheme();
@@ -29,7 +29,7 @@ const SettingScreen = () => {
   };
 
   React.useEffect(() => {
-    if (theme == 'light') setDarkMode(false);
+    if (theme.value == 'light') setDarkMode(false);
     else setDarkMode(true);
   }, []);
 
