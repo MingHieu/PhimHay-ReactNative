@@ -1,6 +1,7 @@
 import {createBottomTabNavigator} from '@react-navigation/bottom-tabs';
 import {NavigationContainer} from '@react-navigation/native';
 import {createNativeStackNavigator} from '@react-navigation/native-stack';
+import {createDrawerNavigator} from '@react-navigation/drawer';
 import React from 'react';
 import IconFontAwesome from 'react-native-vector-icons/FontAwesome';
 import IconIonicons from 'react-native-vector-icons/Ionicons';
@@ -22,6 +23,7 @@ import {APP_SCREEN_TYPES} from './screenTypes';
 
 const Tab = createBottomTabNavigator();
 const Stack = createNativeStackNavigator();
+const Drawer = createDrawerNavigator();
 
 const DiscoverStack = () => {
   return (
@@ -45,7 +47,7 @@ const DiscoverStack = () => {
   );
 };
 
-const HomeTabs = () => {
+const HomeTab = () => {
   const theme = useSelector(state => state.theme);
 
   return (
@@ -80,6 +82,19 @@ const HomeTabs = () => {
   );
 };
 
+const MenuDrawer = () => {
+  return (
+    <Drawer.Navigator
+      initialRouteName={APP_SCREEN_TYPES.HOME_TAB}
+      screenOptions={{
+        headerShown: false,
+        drawerType: 'slide',
+      }}>
+      <Drawer.Screen name={APP_SCREEN_TYPES.HOME_TAB} component={HomeTab} />
+    </Drawer.Navigator>
+  );
+};
+
 const AppSource = () => {
   const theme = useSelector(state => state.theme);
   const dispatch = useDispatch();
@@ -107,8 +122,8 @@ const AppSource = () => {
           component={SplashScreen}
         />
         <Stack.Screen
-          name={APP_SCREEN_TYPES.HOME_TAB}
-          component={HomeTabs}
+          name={APP_SCREEN_TYPES.MENU_DRAWER}
+          component={MenuDrawer}
           options={{
             animation: 'fade',
           }}

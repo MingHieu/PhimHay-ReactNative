@@ -4,6 +4,7 @@ import {SCREEN_WIDTH} from '../../shared/theme/size';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useTheme} from '@react-navigation/native';
 import {useGlobalStyle} from '../../shared/hook';
+import { APP_SCREEN_TYPES } from '../../routes/screenTypes';
 
 const ConfigItem = props => {
   const {id, name, params, screeningItems, navigation} = props;
@@ -11,7 +12,7 @@ const ConfigItem = props => {
   const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
-    navigation.navigate('Category', {
+    navigation.navigate(APP_SCREEN_TYPES.CATEGORY, {
       params,
       screeningItems,
     });

@@ -8,6 +8,7 @@ import Animated, {
 } from 'react-native-reanimated';
 import {useSelector} from 'react-redux';
 import {SCREEN_WIDTH} from '../../shared/theme/size';
+import {APP_SCREEN_TYPES} from '../../routes/screenTypes';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
@@ -34,7 +35,7 @@ const SplashScreen = () => {
       damping: 12,
     });
     setTimeout(() => {
-      navigation.navigate('HomeTab');
+      navigation.navigate(APP_SCREEN_TYPES.MENU_DRAWER);
     }, 1000);
   }, []);
 

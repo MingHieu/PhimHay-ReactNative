@@ -8,6 +8,7 @@ import {
 } from 'react-native';
 import LazyImage from '../../../components/LazyImage';
 import {useGlobalStyle} from '../../../shared/hook';
+import { APP_SCREEN_TYPES } from '../../../routes/screenTypes';
 
 const SingleAlbumItem = props => {
   const globalStyles = useGlobalStyle();
@@ -28,7 +29,7 @@ const SingleAlbumItem = props => {
   } = props;
 
   const _onPress = () => {
-    navigation.navigate('MovieDetail', {
+    navigation.navigate(APP_SCREEN_TYPES.MOVIE_DETAIL, {
       id,
       category,
     });

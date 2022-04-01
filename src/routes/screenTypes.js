@@ -9,8 +9,10 @@ export const APP_SCREEN_TYPES = {
   DISCOVER_STACK: 'DiscoverStack',
   SEARCH: 'Search',
   SETTING: 'Setting',
+  MENU_DRAWER:'MenuDrawer',
   // Discover Stack
   DISCOVER: 'Discover',
   CATEGORY: 'Category',
   CATEGORY_DETAIL: 'CategoryDetail',
+  // Menu Drawer
 };

@@ -3,13 +3,14 @@ import {StyleSheet, Text, TouchableOpacity, View, Image} from 'react-native';
 import Entypo from 'react-native-vector-icons/Entypo';
 import {useGlobalStyle} from '../../../shared/hook';
 import {SCREEN_WIDTH} from '../../../shared/theme/size';
+import { APP_SCREEN_TYPES } from '../../../routes/screenTypes';
 
 const CategoryItem = props => {
   const {name, params, category, screeningType, navigation} = props;
   const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
-    navigation.navigate('CategoryDetail', {
+    navigation.navigate(APP_SCREEN_TYPES.CATEGORY_DETAIL, {
       name,
       params,
       category,

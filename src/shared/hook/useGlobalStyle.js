@@ -18,6 +18,13 @@ const getGlobalStyles = props => {
     text: {
       color: colors.text,
     },
+    optionContainer: {
+      backgroundColor: colors.shadow,
+    },
+    option: {
+      backgroundColor: colors.background,
+      borderColor: colors.cardBorder,
+    },
   });
 };
 

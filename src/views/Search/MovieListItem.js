@@ -10,6 +10,7 @@ import {
 import LazyImage from '../../components/LazyImage';
 import {useGlobalStyle} from '../../shared/hook';
 import {SCREEN_WIDTH} from '../../shared/theme/size';
+import { APP_SCREEN_TYPES } from '../../routes/screenTypes';
 
 const MovieListItem = props => {
   const {
@@ -33,7 +34,7 @@ const MovieListItem = props => {
       Alert.alert('Error', 'Movie is not available');
       return;
     }
-    navigation.navigate('MovieDetail', {
+    navigation.navigate(APP_SCREEN_TYPES.MOVIE_DETAIL, {
       id: id,
       category: dramaType.code == 'MOVIE' ? 0 : 1,
     });

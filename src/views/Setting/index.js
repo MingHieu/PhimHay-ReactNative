@@ -1,16 +1,15 @@
 import {useTheme} from '@react-navigation/native';
 import React from 'react';
 import {
-  Image,
   SafeAreaView,
   StyleSheet,
-  Switch,
   Text,
   TouchableOpacity,
   View,
 } from 'react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import Title from '../../components/Title/index';
+import Toggle from '../../components/Toggle';
 import {changeTheme} from '../../core/redux/themeSlice';
 import {DARK_MODE} from '../../core/storage';
 import {useGlobalStyle} from '../../shared/hook';
@@ -47,8 +46,10 @@ const SettingScreen = () => {
     <SafeAreaView style={globalStyles.safeArea}>
       <Title text={'Setting'} />
       <View style={[globalStyles.container, styles.container]}>
-        {/* <TouchableOpacity style={styles.optionContainer} onPress={openModal}>
-          <View style={styles.option}>
+        {/* <TouchableOpacity
+          style={[styles.optionContainer, globalStyles.optionContainer]}
+          onPress={openModal}>
+          <View style={[styles.option, globalStyles.option]}>
             <Text style={styles.text}>Buy me a coffee</Text>
             <Image
               source={require('../../assets/image/coffee-cup.png')}
@@ -58,48 +59,18 @@ const SettingScreen = () => {
         </TouchableOpacity> */}
         <DraggableModal ref={modalRef} />
 
-        <View
-          style={[
-            styles.optionContainer,
-            {
-              backgroundColor: colors.shadow,
-            },
-          ]}>
-          <View
-            style={[
-              styles.option,
-              {
-                backgroundColor: colors.background,
-                borderColor: colors.cardBorder,
-              },
-            ]}>
-            <Text style={[globalStyles.text, styles.text]}>Dark mode</Text>
-            <Switch
-              value={darkMode}
-              onValueChange={darkModeHanlde}
-              trackColor={{true: 'red'}}
-              thumbColor={'#fff'}
-            />
+        <View style={[styles.optionContainer, globalStyles.optionContainer]}>
+          <View style={[styles.option, globalStyles.option]}>
+            <Text style={[globalStyles.text, styles.text]}>Dark Mode</Text>
+            <Toggle value={darkMode} onValueChange={darkModeHanlde} />
           </View>
         </View>
 
         <TouchableOpacity
-          style={[
-            styles.optionContainer,
-            {
-              backgroundColor: colors.shadow,
-            },
-          ]}
+          style={[styles.optionContainer, globalStyles.optionContainer]}
           onPress={openModal}>
-          <View
-            style={[
-              styles.option,
-              {
-                backgroundColor: colors.background,
-                borderColor: colors.cardBorder,
-              },
-            ]}>
-            <Text style={[globalStyles.text, styles.text]}>About us</Text>
+          <View style={[styles.option, globalStyles.option]}>
+            <Text style={[globalStyles.text, styles.text]}>About Us</Text>
           </View>
         </TouchableOpacity>
       </View>

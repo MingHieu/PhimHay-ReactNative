@@ -9,6 +9,7 @@ import {
 import LazyImage from '../../../components/LazyImage/index';
 import {useGlobalStyle} from '../../../shared/hook';
 import {SCREEN_WIDTH} from '../../../shared/theme/size';
+import { APP_SCREEN_TYPES } from '../../../routes/screenTypes';
 
 const CategoryDetailItem = props => {
   const {coverVerticalUrl, domainType, id, name, sort, navigation} = props;
@@ -16,7 +17,7 @@ const CategoryDetailItem = props => {
 
 
   const _onPress = () => {
-    navigation.navigate('MovieDetail', {
+    navigation.navigate(APP_SCREEN_TYPES.MOVIE_DETAIL, {
       id,
       category: domainType,
     });

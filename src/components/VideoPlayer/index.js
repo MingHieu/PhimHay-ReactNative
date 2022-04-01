@@ -159,6 +159,11 @@ const VideoPlayer = props => {
   const _onProgress = props => {
     const {currentTime} = props;
 
+    /* 
+    - Nếu tua thì sẽ có seekTime
+    - Kiểm tra xem seekTime và currentTime có giống nhau không để 
+    biết được video có đang load không
+    */
     if (seekTime) {
       const t = Math.abs(Math.ceil(seekTime - currentTime));
       if (t > 1) {
@@ -167,12 +172,22 @@ const VideoPlayer = props => {
       }
       setSeekTime(null);
     }
+    /*
+    - Khi video đang load thì currentTime sẽ bằng với current
+    - Nếu video đang chạy sẽ để Loading Video thành true
+    - Nếu video không chạy thì thôi
+    */
     if (currentTime == current) {
       if (!pause) setLoadingVideo(true);
       return;
     }
+    // Nếu video chạy mượt sẽ chuyển loading về false
     if (loadingVideo) {
       setLoadingVideo(false);
+    }
+    // Nếu video chạy chuyển first touch về false
+    if(firstTouch){
+      setFirstTouch(false)
     }
     setCurrent(currentTime);
   };

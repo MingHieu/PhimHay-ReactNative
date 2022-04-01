@@ -9,13 +9,14 @@ import {
 import {SCREEN_WIDTH} from '../../shared/theme/size';
 import LazyImage from '../../components/LazyImage/index';
 import {useGlobalStyle} from '../../shared/hook';
+import { APP_SCREEN_TYPES } from '../../routes/screenTypes';
 
 const RecommendListItem = props => {
   const {cover, domainType, id, title, navigation} = props;
   const globalStyles = useGlobalStyle();
 
   const _onPress = () => {
-    navigation.navigate('MovieDetail', {
+    navigation.navigate(APP_SCREEN_TYPES.MOVIE_DETAIL, {
       id,
       category: domainType,
     });

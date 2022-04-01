@@ -23,6 +23,7 @@ import {
   STATUS_BAR_HEIGHT,
 } from '../../shared/theme/size';
 import MovieTagList from './MovieTagList';
+import { APP_SCREEN_TYPES } from '../../routes/screenTypes';
 
 const MovieDetail = () => {
   const navigation = useNavigation();
@@ -46,11 +47,11 @@ const MovieDetail = () => {
   }, []);
 
   const backHandle = () => {
-    navigation.navigate('HomeTab');
+    navigation.navigate(APP_SCREEN_TYPES.HOME_TAB);
   };
 
   const watchHandle = () => {
-    navigation.navigate('WatchScreen', {
+    navigation.navigate(APP_SCREEN_TYPES.WATCH_SCREEN, {
       id,
       category,
       movieDetail,
