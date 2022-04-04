@@ -1,3 +1,4 @@
+import {useFocusEffect, useNavigation} from '@react-navigation/native';
 import React from 'react';
 import {
   ActivityIndicator,
@@ -6,6 +7,8 @@ import {
   StyleSheet,
   Text,
   View,
+  BackHandler,
+  Alert,
 } from 'react-native';
 import Title from '../../components/Title';
 import {HomeApi} from '../../core/api';
@@ -15,6 +18,7 @@ import BlockGroup from './BlockGroup';
 import SingleAlbum from './SingleAlbum';
 
 const HomeScreen = () => {
+  const navigation = useNavigation();
   const [page, setPage] = React.useState(0);
   const [recommendItems, setRecommendItems] = React.useState([]);
   const [loading, setLoading] = React.useState(false);
@@ -24,8 +28,7 @@ const HomeScreen = () => {
   React.useEffect(() => {
     HomeApi.getHome(page)
       .then(data => {
-        if (page == 0) setPage(prev => prev + 2);
-        else setPage(prev => prev + 1);
+        setPage(prev => prev + 1);
         setRecommendItems(prev => prev.concat(data.data.recommendItems));
       })
       .catch(e => {
@@ -95,7 +98,36 @@ const HomeScreen = () => {
     if (loading) return <ActivityIndicator size="large" color="grey" />;
     return null;
   };
+  // prevent go back
+  React.useEffect(
+    () =>
+      navigation.addListener('beforeRemove', e => {
+        return;
+        e.preventDefault();
+      }),
+    [navigation],
+  );
+  useFocusEffect(
+    React.useCallback(() => {
+      const onBackPress = () => {
+        Alert.alert(
+          'Exit App',
+          'Do you want to exit?',
+          [
+            {text: 'No', onPress: () => {}},
+            {text: 'Yes', onPress: () => BackHandler.exitApp()},
+          ],
+          {cancelable: false},
+        );
+        return true;
+      };
 
+      BackHandler.addEventListener('hardwareBackPress', onBackPress);
+
+      return () =>
+        BackHandler.removeEventListener('hardwareBackPress', onBackPress);
+    }, []),
+  );
   return (
     <SafeAreaView style={globalStyles.safeArea}>
       <Title text={'Home'} />

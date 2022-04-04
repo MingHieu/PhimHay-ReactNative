@@ -24,5 +24,3 @@ const RecommendList = props => {
 };
 
 export default React.memo(RecommendList);
-
-const styles = StyleSheet.create({});

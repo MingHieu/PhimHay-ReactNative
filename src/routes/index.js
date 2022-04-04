@@ -122,10 +122,11 @@ const AppSource = () => {
           component={SplashScreen}
         />
         <Stack.Screen
-          name={APP_SCREEN_TYPES.MENU_DRAWER}
-          component={MenuDrawer}
+          name={APP_SCREEN_TYPES.HOME_TAB}
+          component={HomeTab}
           options={{
             animation: 'fade',
+            gestureEnabled: false,
           }}
         />
         <Stack.Screen

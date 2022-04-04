@@ -35,13 +35,13 @@ const SplashScreen = () => {
       damping: 12,
     });
     setTimeout(() => {
-      navigation.navigate(APP_SCREEN_TYPES.MENU_DRAWER);
+      navigation.navigate(APP_SCREEN_TYPES.HOME_TAB);
     }, 1000);
   }, []);
 
   return (
     <View style={styles.container}>
-      <StatusBar
+      <StatusBar     
         translucent
         backgroundColor="transparent"
         barStyle={theme.value == 'light' ? 'dark-content' : 'light-content'}

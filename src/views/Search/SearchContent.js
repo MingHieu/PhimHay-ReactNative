@@ -11,7 +11,7 @@ const SearchContent = props => {
   const globalStyles = useGlobalStyle();
 
   return (
-    <View style={styles.container}>
+    <View style={globalStyles.container}>
       <FlatList
         data={movieList}
         renderItem={({item, index}) => (
