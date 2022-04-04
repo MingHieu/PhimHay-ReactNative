@@ -1,22 +1,11 @@
 import React from 'react';
-import {
-  Image,
-  StyleSheet,
-  Text,
-  View,
-  BackHandler,
-  ActivityIndicator,
-} from 'react-native';
-import Orientation from 'react-native-orientation';
+import {StyleSheet, View, BackHandler, ActivityIndicator} from 'react-native';
+import Orientation from 'react-native-orientation-locker';
 import Video from 'react-native-video';
 import {SCREEN_WIDTH} from '../../shared/theme/size';
 import Control from './Control';
 import Poster from './Poster';
-import {
-  useFocusEffect,
-  useNavigation,
-  useTheme,
-} from '@react-navigation/native';
+import {useFocusEffect, useTheme} from '@react-navigation/native';
 
 const VideoPlayer = props => {
   const {
@@ -48,27 +37,6 @@ const VideoPlayer = props => {
   const [loadingVideo, setLoadingVideo] = React.useState(true);
   const [seekTime, setSeekTime] = React.useState();
   const {colors} = useTheme();
-
-  React.useEffect(() => {
-    return () => {
-      clearTimeout(timeRef);
-      timeRef.current = null;
-      setDis(true);
-      setFirstTouch(true);
-    };
-  }, [source]);
-
-  React.useEffect(() => {
-    const unsubcribe = Orientation.addOrientationListener(orientation => {
-      if (orientation == 'LANDSCAPE') {
-        setFullScreen(true);
-      }
-      if (orientation == 'PORTRAIT') {
-        setFullScreen(false);
-      }
-    });
-    return unsubcribe;
-  }, []);
 
   const fullScreenHandle = () => {
     if (!canControl) return;
@@ -123,11 +91,11 @@ const VideoPlayer = props => {
     if (timeRef.current) {
       clearTimeout(timeRef.current);
     }
-    if (!canControl) {
-      setTimeout(() => {
-        setCanControl(true);
-      }, 200);
-    }
+    if (canControl) return;
+
+    setTimeout(() => {
+      setCanControl(true);
+    }, 200);
   };
 
   const _onTouchEnd = () => {
@@ -186,8 +154,8 @@ const VideoPlayer = props => {
       setLoadingVideo(false);
     }
     // Nếu video chạy chuyển first touch về false
-    if(firstTouch){
-      setFirstTouch(false)
+    if (firstTouch) {
+      setFirstTouch(false);
     }
     setCurrent(currentTime);
   };
@@ -219,6 +187,26 @@ const VideoPlayer = props => {
         BackHandler.removeEventListener('hardwareBackPress', onBackPress);
     }, [fullScreen]),
   );
+
+  React.useEffect(() => {
+    const _onOrientationDidChange = orientation => {
+      if (orientation == 'LANDSCAPE-LEFT' || orientation == 'LANDSCAPE-RIGHT') {
+        setFullScreen(true);
+        waitHidden = true;
+      }
+      if (orientation == 'PORTRAIT') {
+        setFullScreen(false);
+      }
+    };
+    Orientation.addOrientationListener(_onOrientationDidChange);
+    return () => {
+      Orientation.removeOrientationListener(_onOrientationDidChange);
+      clearTimeout(timeRef.current);
+      timeRef.current = null;
+      setDis(true);
+      setFirstTouch(true);
+    };
+  }, [source]);
 
   return (
     <View

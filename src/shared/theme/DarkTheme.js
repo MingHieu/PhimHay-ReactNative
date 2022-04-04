@@ -13,6 +13,7 @@ const DarkTheme = {
     shadow:colors.WHITE_OPACITY_6,
     notification: '#ff0',
     icon: colors.WHITE,
+    statusBar:'light-content'
   },
 };
 

@@ -1,20 +1,19 @@
-import {useNavigation} from '@react-navigation/native';
+import {useNavigation, useTheme} from '@react-navigation/native';
 import React from 'react';
-import {Image, StatusBar, StyleSheet, Text, View} from 'react-native';
+import {StatusBar, StyleSheet, View} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useSharedValue,
   withSpring,
 } from 'react-native-reanimated';
-import {useSelector} from 'react-redux';
-import {SCREEN_WIDTH} from '../../shared/theme/size';
 import {APP_SCREEN_TYPES} from '../../routes/screenTypes';
+import {SCREEN_WIDTH} from '../../shared/theme/size';
 
 const SplashScreen = () => {
   const navigation = useNavigation();
   const pos1 = useSharedValue(SCREEN_WIDTH);
   const pos2 = useSharedValue(-SCREEN_WIDTH);
-  const theme = useSelector(state => state.theme);
+  const {colors} = useTheme();
 
   const trans1 = useAnimatedStyle(() => {
     return {
@@ -41,10 +40,10 @@ const SplashScreen = () => {
 
   return (
     <View style={styles.container}>
-      <StatusBar     
+      <StatusBar
         translucent
         backgroundColor="transparent"
-        barStyle={theme.value == 'light' ? 'dark-content' : 'light-content'}
+        barStyle={colors.statusBar}
       />
       <Animated.Image
         source={require('../../assets/image/clapperboard.png')}

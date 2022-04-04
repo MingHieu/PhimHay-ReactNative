@@ -1,6 +1,5 @@
 import React from 'react';
 import {StyleSheet, View} from 'react-native';
-import Animated from 'react-native-reanimated';
 import BottomControl from './BottomControl';
 import SettingControl from './SettingControl';
 import Subtitle from './Subtitle';
