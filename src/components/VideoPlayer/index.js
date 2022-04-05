@@ -192,7 +192,6 @@ const VideoPlayer = props => {
     const _onOrientationDidChange = orientation => {
       if (orientation == 'LANDSCAPE-LEFT' || orientation == 'LANDSCAPE-RIGHT') {
         setFullScreen(true);
-        waitHidden = true;
       }
       if (orientation == 'PORTRAIT') {
         setFullScreen(false);
