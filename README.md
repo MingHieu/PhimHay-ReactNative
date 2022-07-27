@@ -1,8 +1,8 @@
 ### PhimHay
 
 <p>
-<a href="https://raw.githubusercontent.com/MingHieu/MingHieu/master/images/PhimHay.png">
-    <img src="./images/PhimHay.png">
+<a href="https://github.com/MingHieu/RN-PhimHay">
+    <img src="https://raw.githubusercontent.com/MingHieu/MingHieu/master/images/PhimHay.png">
 </a>
 
 - Beautiful UX / UI ( 7 screens : Splash Screen, Home, Category, Search, Setting, Movie Detail, Watch Movie )
