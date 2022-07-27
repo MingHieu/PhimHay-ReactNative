@@ -1,7 +1,7 @@
 ### PhimHay
 
 <p>
-<a href="https://github.com/MingHieu/RN-PhimHay](https://github.com/MingHieu/MingHieu/blob/master/images/PhimHay.png">
+<a href="https://github.com/MingHieu/MingHieu/blob/master/images/PhimHay.png">
     <img src="./images/PhimHay.png">
 </a>
 
